@@ -8,7 +8,7 @@ const SignupForm = () => {
 
   const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '' });
   
-  const [addUser] = useMutation(ADD_USER);
+  const [addUser, { error, data }] = useMutation(ADD_USER);
  
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -19,7 +19,6 @@ const SignupForm = () => {
       if (!response.ok) {
         throw new Error('something went wrong!');
       }
-
       const { token, user } = await response.json();
       console.log(user);
       Auth.login(token);
