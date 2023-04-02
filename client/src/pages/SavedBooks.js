@@ -7,7 +7,7 @@ import {
   Col
 } from 'react-bootstrap';
 import {GET_ME} from '../utils/queries'
-import { REMOVE_BOOK } from '../mutations';
+import { REMOVE_BOOK } from '../utils/mutations';
 import { removeBookId } from '../utils/localStorage';
 
 const SavedBooks = () => {
