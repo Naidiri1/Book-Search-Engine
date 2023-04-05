@@ -55,14 +55,15 @@ const resolvers = {
     },
     deleteBook: async (parent, {bookId}, context) =>{
         
-    if (context.user){
-        return await User.findOneAndUpdate(
-            { _id: context.user._id },
-            { $pull: { savedBooks: { bookId } } },
-            { new: true }
-          );
-    }
-    throw new AuthenticationError("Not logged in!");
+      if (context.user) {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { savedBooks: { bookId } } },
+          { new: true }
+        ).populate("savedBooks");
+        return updatedUser;
+      }
+      throw new AuthenticationError("Not logged in!");
     }
   },
 };
